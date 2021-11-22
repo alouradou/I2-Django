@@ -9,26 +9,47 @@
                 {{ animal.id_animal }}
             </h2>
         </div>
-        <div class="card-body">
-            <h2 class="card-text"> Informations sur cette brave bête</h2>
-            <b>{{ animal.id_animal }}</b> est un {{ animal.race }} de type {{ animal.type }}
+        <div class="container">
+            <div class="row">
+                <div class="card-body col" style="max-width: 60%;">
+                    <h2 class="card-text"> Informations sur cette brave bête</h2>
+                    <p><b>{{ animal.id_animal }}</b> est un {{ animal.race }} de type {{ animal.type }}</p>
+                    <h2>Discutons...</h2>
+                    <p>User : "Comment ça va ?"</p>
+                    <p>{{ animal.id_animal }} : "Pas trop mal, je suis <b>{{ animal.etat }}</b> dans le•la <b>{{ animal.lieu }}</b>"</p>
+                
+                </div>
+                <div class="card-body col" style="width: 30%;">
+                    <img src="{% if animal.photo == '#' %}https://www.thoiry.net/sites/thoiry.net/files/2018-02/loutre1600x800.jpg
+                    {% else%}
+                      {{animal.photo}}
+                    {% endif %}" style="height: auto; width: 100%; display: block;object-fit: cover;" />
+                </div>
+            </div>
         </div>
-        <div class="card-header"></div>
-        <div class="card-body">
-            <h2>Discutons...</h2>
-            <p>User : "Comment ça va ?"</p>
-            <p>{{ animal.id_animal }} : "Pas trop mal, je suis <b>{{ animal.etat }}</b> dans le•la <b>{{ animal.lieu }}</b>"</p>
-        </div>
-        <div class="card-header"></div>
-        <div class="card-body">
-            <form method="POST" class="post-form">{% csrf_token %}
-                <h2 class="card-text"> Déplacer {{ animal.id_animal }}</h2>
-                <span>Depuis : <b>{{ animal.lieu|capfirst }}</b></span><br/>
-                <span>Jusqu'à : </span>
-                {{ form.as_p }}
-                <a class="btn btn-sm btn-outline-secondary card-text" href="{% url 'animal_list' %}">Retour</a>
-                <button type="submit" class="btn btn-sm btn-outline-success card-text">Déplacer</button>
-            </form>
+            
+        <div class="card-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" class="post-form">{% csrf_token %}
+                            <h2 class="card-text"> Déplacer {{ animal.id_animal }}</h2>
+                            <span>Depuis : <b>{{ animal.lieu|capfirst }}</b></span><br/>
+                            <span>Jusqu'à : </span>
+                            {{ form.as_p }}
+                            <a class="btn btn-sm btn-outline-secondary card-text" href="{% url 'animal_list' %}">Retour</a>
+                            <button type="submit" class="btn btn-sm btn-outline-success card-text">Déplacer</button>
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <form method="POST" class="post-form">{% csrf_token %}
+                            <h2 class="card-text"> Sourire !</h2>
+                            <p>Placer l'url de la nouvelle photo : <input placeholder="https://image.ec-m.fr/"/></p>
+                            <button type="submit" class="btn btn-sm btn-outline-success card-text">Changer la photo</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
