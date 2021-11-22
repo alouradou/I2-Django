@@ -5,6 +5,7 @@ urlpatterns = [
     path('posts', views.post_list, name='post_list'),
     path('', views.animal_list, name='animal_list'),
     path('animal/<str:id_animal>/', views.animal_detail, name='animal_detail'),
-    #path('animal/<str:id_animal>/?<str:message>', views.animal_detail, name='animal_detail_mes'),
+    path('animal/<str:id_animal>/?<str:message>', views.animal_detail, name='animal_detail_mes'),
+    path('post/new/', views.post_new, name='post_new'),
 ]
 

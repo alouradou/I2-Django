@@ -1,0 +1,37 @@
+{% extends 'animalerie/template.html' %}
+
+{% load static %}
+{% block content %}
+<div class="page-header">
+    <div class="card">
+        <div class="header">
+            <h2>
+                {{ animal.id_animal }}
+            </h2>
+        </div>
+        <div class="card-body">
+            <h2 class="card-text"> Informations sur cette brave bête</h2>
+            <b>{{ animal.id_animal }}</b> est un {{ animal.race }} de type {{ animal.type }}
+        </div>
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h2>Discutons...</h2>
+            <p>User : "Comment ça va ?"</p>
+            <p>{{ animal.id_animal }} : "Pas trop mal, je suis <b>{{ animal.etat }}</b> dans le•la <b>{{ animal.lieu }}</b>"</p>
+        </div>
+        <div class="card-header"></div>
+        <div class="card-body">
+            <form method="POST" class="post-form">{% csrf_token %}
+                <h2 class="card-text"> Déplacer {{ animal.id_animal }}</h2>
+                <span>Depuis : <b>{{ animal.lieu|capfirst }}</b></span><br/>
+                <span>Jusqu'à : </span>
+                {{ form.as_p }}
+                <a class="btn btn-sm btn-outline-secondary card-text" href="{% url 'animal_list' %}">Retour</a>
+                <button type="submit" class="btn btn-sm btn-outline-success card-text">Déplacer</button>
+            </form>
+        </div>
+    </div>
+</div>
+ 
+ 
+{% endblock %}
