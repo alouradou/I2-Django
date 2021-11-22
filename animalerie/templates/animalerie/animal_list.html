@@ -1,0 +1,29 @@
+{% extends 'animalerie/template.html' %}
+{% block content %}
+
+    <!-- <div class="container"> -->
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap;justify-content: center;">
+        {% for animal in animals %}
+          <!-- <div class="col-md-3"> -->
+              <div style="display: flexbox;width: 280px;">
+            <div class="card">
+              <img class="card-img-top" data-src="{{animal.photo}}" alt="Image" style="height: 150px; width: 100%; display: block;object-fit: cover;" src="https://www.thoiry.net/sites/thoiry.net/files/2018-02/loutre1600x800.jpg" data-holder-rendered="true">
+              <div class="card-body">
+                <span class="card-text"><b>{{animal.id_animal}}</b></span>
+                <p><span class="card-text">{{animal.etat|capfirst}},</span>
+                <span class="card-text">{{animal.lieu|capfirst}}</span>
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-primary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-success">Edit</button>
+                  </div>
+                  <small class="text-muted">{{ animal.race|capfirst }}</small>
+                </div>
+              </div>
+            </div></div>
+          <!-- </div> -->
+        {% endfor %}
+        </div>
+    <!-- </div> -->
+{% endblock %}

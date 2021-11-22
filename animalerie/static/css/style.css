@@ -122,6 +122,7 @@
       max-width: 90%;
       font-size: 0.8em;
       margin: 0 auto;
+      
       background: #fff;
   }
   #pied div {
@@ -131,6 +132,7 @@
   #pied div div{
       padding-right: 3px;
       text-align: center;
+      margin-bottom: 15px;
   }
   
   
@@ -176,8 +178,15 @@
 }
 
 @media (max-width: 600px){
+    #menu {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
     #menu a {
-        display: none;
+        display: flexbox;
     }
     #tete {
         padding:5px 10px;
