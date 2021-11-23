@@ -73,7 +73,6 @@
       <h2>Les équipements !</h2>
     </div>
     <div class="card-body">
-  <!-- <div class="container"> -->
       <div style="display: flex; flex-direction: row; flex-wrap: wrap;justify-content: center;box-sizing: border-box;max-width: 100%;">
       {% for lieu in equipements %}
       <div style="display: flexbox;width: 400px;max-width: 100%;">
@@ -87,14 +86,13 @@
               btn-danger
             {% endif %}" style="height: 100%;margin:auto;display: flex!important;color:white;justify-content: space-between!important;">{{ lieu.disponibilite|capfirst }}</small>
           </div><img class="card-img-top" src="{{ lieu.photo }}" style="height: 200px;object-fit: cover;" />
-          <div class="card-body" style="box-sizing: border-box;overflow: hidden;">
+          <!-- <div class="card-body" style="box-sizing: border-box;overflow: hidden;">
             
-          </div>
+          </div> -->
           </div>
         </div>
       {% endfor %}
       </div>
-  <!-- </div> -->
   </div>
 </div>
 
