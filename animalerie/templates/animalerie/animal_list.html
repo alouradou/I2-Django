@@ -87,14 +87,18 @@
             {% endif %}" style="height: 100%;margin:auto;display: flex!important;color:white;justify-content: space-between!important;">{{ lieu.disponibilite|capfirst }}</small>
           </div><img class="card-img-top" src="{{ lieu.photo }}" style="height: 200px;object-fit: cover;" />
           {% if lieu.disponibilite != 'libre' %}<div class="card-body" style="box-sizing: border-box;overflow: hidden;">
-            {% for animal in animals %}
-              {% if animal.lieu.id_equip == lieu.id_equip %}
-                <small class="text-muted">{{ animal|capfirst }}</small>
-              {% endif %}
-            {% endfor %}
-            <div class="btn-group">
-              <button class="btn btn-sm btn-outline-success">Libérer</button>
-            </div>
+            
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-outline-success" >Marquer comme libre</button>
+                </div>
+                {% for animal in animals %}
+                  {% if animal.lieu.id_equip == lieu.id_equip %}
+                    <small class="text-muted" style="justify-content: end;">{{ animal|capfirst }}<br/></small>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            
           </div>{% endif %}
           </div>
         </div>

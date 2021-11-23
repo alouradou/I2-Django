@@ -1,24 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Animal, Billet, Equipement
-from .forms import MoveForm
-
-def post_list(request):
-    billets = Billet.objects.order_by('published_date')
-    return render(request, 'animalerie/post_list.html', {'billets': billets})
+from .forms import MoveForm, freeSpace, submitPhoto
 
 def animal_list(request):
     animals = Animal.objects.all()
     equipements = Equipement.objects.all()
-    return render(request, 'animalerie/animal_list.html', {'animals': animals,'equipements': equipements})
-
-def equipement_list(request):
-    equipements = Equipement.objects.all()
-    return render(request, 'animalerie/animal_list.html', {'equipements': equipements})
-
-def post_new(request):
-    form = MoveForm()
-    return render(request, 'animalerie/post_edit.html', {'form': form})
+    free = freeSpace()
+    return render(request, 'animalerie/animal_list.html', {'animals': animals,'equipements': equipements,'free':free})
 
 def animal_detail(request, id_animal,error=None):
     animal = get_object_or_404(Animal, id_animal=id_animal)
