@@ -7,14 +7,3 @@ class MoveForm(forms.ModelForm):
     class Meta:
         model = Animal
         fields = ('lieu',)
-
-class submitPhoto(forms.ModelForm):
-    class Meta:
-        model = Animal
-        fields = ('photo',)
-
-
-class freeSpace(forms.ModelForm):
-    class Meta:
-        model = Equipement
-        fields = ('disponibilite',)

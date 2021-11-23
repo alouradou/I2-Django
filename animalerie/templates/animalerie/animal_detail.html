@@ -51,6 +51,7 @@
                     <div class="col-6">
                         <form method="POST" class="post-form">{% csrf_token %}
                             <h2 class="card-text"> Sourire !</h2>
+                            {{ photo.as_ul }}
                             <p>Placer l'url de la nouvelle photo : <input placeholder="https://image.ec-m.fr/"/></p>
                             <button type="submit" class="btn btn-sm btn-outline-success card-text">Changer la photo</button>
                         </form>
