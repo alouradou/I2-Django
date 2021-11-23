@@ -20,27 +20,37 @@ def post_new(request):
     form = MoveForm()
     return render(request, 'animalerie/post_edit.html', {'form': form})
 
-def animal_detail(request, id_animal):
+def animal_detail(request, id_animal,error=None):
     animal = get_object_or_404(Animal, id_animal=id_animal)
     if request.method == "POST":
         form = MoveForm(request.POST)
         if form.is_valid():
-            print('LE FORM EST VALIDE !!')
             ancien_lieu = get_object_or_404(Equipement, id_equip=animal.lieu)
             post = form.save(commit=False)
             nouveau_lieu = get_object_or_404(Equipement, id_equip=post.lieu)
-            ancien_lieu.disponibilite = 'libre'
-            ancien_lieu.save()
-            get_object_or_404(Animal, id_animal=id_animal).changeLieu(nouveau_lieu).save()
-            nouveau_lieu.disponibilite = 'occupe'
-            nouveau_lieu.save()
+            modif = get_object_or_404(Animal, id_animal=id_animal).changeLieu(nouveau_lieu)
+            if modif=='error_not_empty' :
+                return redirect('animal_detail_mes', id_animal=id_animal, error='Lieu Occupé')
+            elif modif=='error_impossible':
+                return redirect('animal_detail_mes', id_animal=id_animal, error='Impossible')
+            else:
+                ancien_lieu.disponibilite = 'libre'
+                ancien_lieu.save()
+                modif.save()
+                nouveau_lieu.disponibilite = 'occupe'
+                nouveau_lieu.save()
             return redirect('animal_detail', id_animal=id_animal)
     else:
          form = MoveForm()
     lieu = animal.lieu
-    return render(request,
-                'animalerie/animal_detail.html',
-                {'animal': animal, 'lieu': lieu, 'form': form})
+    if error==None:
+        return render(request,
+                    'animalerie/animal_detail.html',
+                    {'animal': animal, 'lieu': lieu, 'form': form})
+    else:
+        return render(request,
+                    'animalerie/animal_detail.html',
+                    {'animal': animal, 'lieu': lieu, 'form': form, 'error':error})
 
 
 

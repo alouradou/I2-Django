@@ -19,9 +19,28 @@ class Animal(models.Model):
     race = models.CharField(max_length=20)
     photo = models.CharField(max_length=200)
     lieu = models.ForeignKey(Equipement, on_delete=models.CASCADE)
+    def actionLieux(self,lieu):
+        if self.etat=='affame' and lieu.id_equip=='mangeoire' : #nourir
+            self.etat = 'repus'
+            return True
+        elif self.etat == 'fatigue' and lieu.id_equip=='nid': #coucher
+            self.etat = 'endormi'
+            return True
+        elif self.etat == 'endormi' and lieu.id_equip=='litiere': #reveiller
+            self.etat = 'affame'
+            return True
+        elif self.etat == 'repus' and lieu.id_equip=='roue': #divertir
+            self.etat = 'fatigue'
+            return True
+        else: return False
     def changeLieu(self,lieu):
-        self.lieu = lieu
-        return self
+        if lieu.disponibilite == 'libre' and self.actionLieux(lieu):
+            self.lieu = lieu
+            return self
+        elif lieu.disponibilite == 'libre':
+            return 'error_impossible'
+        else:
+            return 'error_not_empty'
     def __str__(self):
         return self.id_animal
 

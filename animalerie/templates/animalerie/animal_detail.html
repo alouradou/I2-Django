@@ -33,6 +33,13 @@
                 <div class="row">
                     <div class="col">
                         <form method="POST" class="post-form">{% csrf_token %}
+                            {% if error == 'Impossible' %}
+                            {% elif error %}
+                                <div class="alert alert-danger alert-dismissible fade in show">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>{{error}} !</strong> <br/>L'animal n'a pas pu effectuer l'action voulue.
+                                </div>
+                            {% endif %}
                             <h2 class="card-text"> Déplacer {{ animal.id_animal }}</h2>
                             <span>Depuis : <b>{{ animal.lieu|capfirst }}</b></span><br/>
                             <span>Jusqu'à : </span>
