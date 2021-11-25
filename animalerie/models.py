@@ -22,23 +22,34 @@ class Animal(models.Model):
     def actionLieux(self,lieu):
         if self.etat=='affame' and lieu.id_equip=='mangeoire' : #nourir
             self.etat = 'repus'
-            return True
+            return ''
         elif self.etat == 'fatigue' and lieu.id_equip=='nid': #coucher
             self.etat = 'endormi'
-            return True
+            return ''
         elif self.etat == 'endormi' and lieu.id_equip=='litiere': #reveiller
             self.etat = 'affame'
-            return True
+            return ''
         elif self.etat == 'repus' and lieu.id_equip=='roue': #divertir
             self.etat = 'fatigue'
-            return True
-        else: return False
+            return ''
+        else:
+            if lieu.id_equip=='mangeoire':
+                return "je n'ai pas faim"
+            elif lieu.id_equip=='nid':
+                return "je n'ai pas sommeil"
+            elif lieu.id_equip=='litiere':
+                return "je ne dors pas"
+            elif lieu.id_equip=='roue':
+                return "je n'ai pas le coeur à m'amuser..."
+            else : return '...erreur'
+
     def changeLieu(self,lieu):
-        if lieu.disponibilite == 'libre' and self.actionLieux(lieu):
+        reason = self.actionLieux(lieu)
+        if lieu.disponibilite == 'libre' and not reason:
             self.lieu = lieu
             return self
         elif lieu.disponibilite == 'libre':
-            return 'error_impossible'
+            return 'error_impossible:'+reason
         else:
             return 'error_not_empty'
     def __str__(self):

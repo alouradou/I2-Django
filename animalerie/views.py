@@ -31,8 +31,8 @@ def animal_detail(request, id_animal,error=None):
             modif = get_object_or_404(Animal, id_animal=id_animal).changeLieu(nouveau_lieu)
             if modif=='error_not_empty' :
                 return redirect('animal_detail_mes', id_animal=id_animal, error='Lieu Occupé')
-            elif modif=='error_impossible':
-                return redirect('animal_detail_mes', id_animal=id_animal, error='Impossible')
+            elif modif.split(':')[0]=='error_impossible':
+                return redirect('animal_detail_mes', id_animal=id_animal, error='Impossible, '+modif.split(':')[1])
             else:
                 ancien_lieu.disponibilite = 'libre'
                 ancien_lieu.save()

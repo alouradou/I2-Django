@@ -11,7 +11,7 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="card-body col" style="max-width: 60%;">
+                <div class="card-body col-lg-7">
                     <h2 class="card-text"> Informations sur cette brave bête</h2>
                     <p><b>{{ animal.id_animal }}</b> est un {{ animal.race }} de type {{ animal.type }}</p>
                     <h2>Discutons...</h2>
@@ -19,7 +19,7 @@
                     <p>{{ animal.id_animal }} : "Pas trop mal, je suis <b>{{ animal.etat }}</b> dans le•la <b>{{ animal.lieu }}</b>"</p>
                 
                 </div>
-                <div class="card-body col" style="width: 30%;">
+                <div class="card-body col-lg-5">
                     <img src="{% if animal.photo == '#' %}https://www.thoiry.net/sites/thoiry.net/files/2018-02/loutre1600x800.jpg
                     {% else%}
                       {{animal.photo}}
@@ -34,10 +34,14 @@
                     <div class="col">
                         <form method="POST" class="post-form">{% csrf_token %}
                             {% if error == 'Impossible' %}
+                            <div class="alert alert-danger alert-dismissible fade in show">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>{{error}} !</strong> <br/>{{ animal.id_animal }} n'a pas pu effectuer l'action voulue.
+                            </div>
                             {% elif error %}
                                 <div class="alert alert-danger alert-dismissible fade in show">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    <strong>{{error}} !</strong> <br/>L'animal n'a pas pu effectuer l'action voulue.
+                                    <strong>{{error}} !</strong> <br/>{{ animal.id_animal }} n'a pas pu effectuer l'action voulue.
                                 </div>
                             {% endif %}
                             <h2 class="card-text"> Déplacer {{ animal.id_animal }}</h2>
@@ -53,7 +57,7 @@
                             <h2 class="card-text"> Sourire !</h2>
                             {{ photo.as_ul }}
                             <p>Placer l'url de la nouvelle photo : <input placeholder="https://image.ec-m.fr/"/></p>
-                            <button type="submit" class="btn btn-sm btn-outline-success card-text">Changer la photo</button>
+                            <button type="submit" class="btn btn-sm btn-outline-success card-text" title="En cours de développement" style="cursor: not-allowed;" disabled>Changer la photo</button>
                         </form>
                     </div>
                 </div>
